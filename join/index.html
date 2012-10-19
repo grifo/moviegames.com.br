@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <title>MovieGames</title>
+    <style>
+    body {
+        max-width:980px;
+        padding:40px;
+        background:#000;
+        color:#eee;
+        margin:0 auto;
+        font:normal 15px/1.3 sans-serif;
+    }
+    </style>
+</head>
+<body>
+    <script>(function(){
+
+        var local = 'http://192.168.2.2'
+
+        function failed(){
+            document.body.innerHTML = '' +
+            '<p>Não foi possível conectar-se ao servidor do MovieGames.</p>' +
+            '<p>Você precisa estar conectado à rede wi-fi <b>MovieGames</b> da sua sala.</p>'
+        }
+
+        function check(){
+            if (this.width > 0 && this.height > 0){
+                location.href = local
+            }
+            failed()
+        }
+
+        var image = new Image()
+        image.onerror = image.onload = check
+        image.src = local+'/images/moviegames-small.png'
+
+        setTimeout(function(){
+            failed()
+            image.onerror = image.onload = null
+            image.src = null
+            image = null
+        }, 2000)
+
+        setTimeout(function(){
+            window.location.reload()
+        }, 10000)
+
+    })()</script>
+</body>
+</html>
